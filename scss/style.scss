@@ -57,7 +57,9 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-track {
 	background: #302C42;        /* цвет зоны отслеживания */
 }
- 
+.hide {
+	overflow: hidden;
+}
 body::-webkit-scrollbar-thumb {
 	background-color: #fff;    /* цвет бегунка */
 	border-radius:5px;       /* округлось бегунка */
@@ -139,6 +141,11 @@ body::-webkit-scrollbar-thumb {
 		font-weight: 700;
 		background: #302C42;
 		cursor: pointer;
+		@media (max-width: 515px){
+			width: 220px;
+			height: 60px;
+			font-size: 16px;
+		}
 	}
 
 	&__btn {
@@ -249,7 +256,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .fixed {
-	// padding: 8px 0px;
+	padding: 8px 0px;
 	position: fixed;
 	background: #0000005f;
 	transition: all 0.3s linear 0s;
