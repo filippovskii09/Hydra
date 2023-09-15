@@ -50,6 +50,19 @@ html, body {
 	font-weight: 700;
 	background: #302C42;
 }
+body::-webkit-scrollbar {
+	width: 4px;               /* ширина всей полосы прокрутки */
+}
+ 
+body::-webkit-scrollbar-track {
+	background: #302C42;        /* цвет зоны отслеживания */
+}
+ 
+body::-webkit-scrollbar-thumb {
+	background-color: #fff;    /* цвет бегунка */
+	border-radius:5px;       /* округлось бегунка */
+	border: 3px solid #fff;  /* отступ вокруг бегунка */
+}
 .container {
 	max-width: 1272px;
 	margin: 0 auto;
@@ -58,8 +71,14 @@ html, body {
 .header {
 	padding: 50px 0px;
 	position: absolute;
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s linear 0s;
 	width: 100%;
+	@media (max-width: 768px){
+		padding: 30px 0px;
+ }
+ @media (max-width: 515px){
+		padding: 15px 0px;
+ }
 	&__container {
 		display: flex;
 		justify-content: space-between;
@@ -70,6 +89,29 @@ html, body {
 		display: flex;
 		align-items: center;
 		gap: 15px;
+		& img {
+			transition: all 0.3s ease 0s;
+		}
+		& img:first-child {
+			animation: rotate 10s linear infinite;
+			@media (max-width: 990px){
+				width: 100px;
+				height: 98px;
+			}
+			@media (max-width: 515px){
+				  width: 69px;
+				  height: 60px;
+			}
+		}
+		& img:last-child {
+			@media (max-width: 990px){
+				  width: 60px;
+			}
+			@media (max-width: 515px){
+				width: 46px;
+				height: 28px;
+		 }
+		}
 	}
 
 	&__menu {
@@ -78,23 +120,80 @@ html, body {
 	&__actions {
 		display: flex;
 		align-items: center;
+		gap: 38px;
+		@media (max-width: 990px){
+			gap: 25px;
+	 }
 	}
 
 	&__action {
+		width: 154px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 48px;
+		border-radius: 40px;
+		border: 2px solid #FFF;
+		color: #FFF;
+		font-size: 12px;
+		font-weight: 700;
+		background: #302C42;
+		cursor: pointer;
 	}
 
 	&__btn {
+		@media (max-width: 962px){
+			  display: none;
+		}
 	}
 }
 .menu {
 
 	&__body {
+		@media (max-width: 962px){
+			  position: fixed;
+			  width: 30%;
+			  height: 100vh;
+			  left: 0;
+			  top: 0;
+			  display: flex;
+			  align-items: flex-start;
+			  padding: 100px 15px;
+			  align-items: center;
+			  background:#625987;
+			  flex-direction: column;
+			  transition: all 0.3s ease 0s;
+			  transform: translateX(-100%);
+			  opacity: 0;
+		}
+		@media (max-width: 768px){
+			  width: 50%;
+		}
+		@media (max-width: 515px){
+			  width: 100%;
+			  padding: 0;
+			  align-items: center;
+			  justify-content: center;
+		}
+		.menu-open & {
+			transform: translateX(0);
+			opacity: 1;
+		}
 	}
 
 	&__list {
 		display: flex;
 		align-items: center;
 		gap: 41px;
+		transition: all 0.3s ease 0s;
+		@media (max-width: 1060px){
+			  gap: 26px;
+		}
+		@media (max-width: 962px){
+			  flex-direction: column;
+			  row-gap: 36px;
+			  padding-bottom: 100px;
+		}
 	}
 
 	&__item {
@@ -105,17 +204,58 @@ html, body {
 		color: #FFF;
 		font-size: 12px;
 		font-weight: 700;
+		transition: all 0.3s linear 0s;
+		position: relative;
+		@media (max-width: 962px){
+			  font-size: 22px;
+		}
+		&::after{
+			content:'';
+			display: inline-block;
+			position: absolute;
+			left: 0;
+			bottom: -10px;
+			width: 100%;
+			height: 2px;
+			opacity: 0;
+			background: #fff;
+			transition: all 0.3s linear 0s;
+		}
+		&:hover::after {
+			opacity: 1;
+			bottom:-5px;
+			transition: all 0.3s linear 0s;
+		}
 	}
 }
 .btn {
+	border-radius: 40px;
+	background: linear-gradient(90deg, #8176AF 0%, #C0B7E8 100%);
+	padding: 17px 37px;
+	background-size: 100% 100%;
+	border: none;
+	cursor: pointer;
+	transition: transform 0.3s linear 0s;
+
 }
+
+@keyframes rotate {
+	0% {
+		 transform: rotate(0deg);
+	}
+	100% {
+		 transform: rotate(360deg);
+	}
+}
+
 .fixed {
-	padding: 5px 0px;
+	// padding: 8px 0px;
 	position: fixed;
 	background: #0000005f;
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s linear 0s;
 	animation-duration: 1.5s;
 	animation-name: animHeader;
+	left: 0;top: 0;
 	& .header__logo img:first-child{
 		width: 50px;
 		height: 50px;
@@ -125,7 +265,6 @@ html, body {
 		height: 30px;
 	}
 }
-
 @keyframes animHeader {
 	from {
 		transform: translateY(-100%);
@@ -137,3 +276,91 @@ html, body {
 	}
 }
 
+.menu__icon {
+	display: none;
+	background: none repeat scroll 0 0 transparent;
+   border: medium none;
+   border-spacing: 0;
+   list-style: none outside none;
+   margin: 0;
+   padding: 0;
+   text-decoration: none;
+   text-indent: 0;
+	@media (max-width: 962px){
+		display: flex;
+		flex-direction: column;
+		row-gap: 7px;
+		margin-right: 10px;
+
+	}
+
+	// & span {
+	// 	display: block;
+	// 	width: 24px;
+	// 	height: 4px;
+	// 	border-radius: 40px;
+	// 	background: linear-gradient(90deg, #C0B7E8 -15.79%, #8176AF 100%);
+	// 	position: relative;
+	// 	left: auto; /* Скидання лівого вирівнювання */
+   //    margin-left: -24px; 
+	// 	transition: all 0.3s ease 0s;
+	// 	&::before,
+	// 	&::after {
+	// 		content:'';
+	// 		display: block;
+	// 		position: absolute;
+	// 		width: 33px;
+	// 		transition: all 0.3s ease 0s;
+	// 		height: 4px;
+	// 		border-radius: 40px;
+	// 		background: linear-gradient(90deg, #C0B7E8 -15.79%, #8176AF 100%);
+	// 	}
+	// 	&::before{
+	// 		content:'';
+	// 		bottom:11px;
+	// 		transition: all 0.3s ease 0s;
+	// 	}
+	// 	&::after{
+	// 		content:'';
+	// 		top: 11px;
+	// 		transition: all 0.3s ease 0s;
+	// 	}
+	// }
+}
+
+.line {
+	display: block;
+	width: 24px;
+	height: 4px;
+	border-radius: 40px;
+	background: linear-gradient(90deg, #C0B7E8 -15.79%, #8176AF 100%);
+	position: relative;
+	transition: transform 0.3s, opacity 0.3s; /* Додавання переходів для transform та opacity */
+
+	&.middle {
+		 margin-left: auto;
+	}
+
+	&.top {
+		 transform-origin: center top;
+		 width: 33px;
+	}
+
+	&.bottom {
+		 transform-origin: center bottom;
+		 width: 33px;
+	}
+}
+
+// .menu-open .middle {
+// 	transform: scale(0); /* Зникає середня лінія */
+// 	opacity: 0;
+// }
+
+// .menu-open .top {
+// 	transform: rotate(-45deg); /* Трансформація у верхню лінію хрестика */
+// }
+
+// .menu-open .bottom {
+// 	transform: rotate(45deg); /* Трансформація у нижню лінію хрестика */
+// }
