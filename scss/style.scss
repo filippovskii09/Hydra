@@ -437,7 +437,7 @@ body::-webkit-scrollbar-thumb {
 		z-index: 10;
 		position: relative;
 		& img {
-			border-radius: 100px 100px 120px 260px;
+			border-radius: 110px 110px 130px 270px;
 			box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.13);
 			transition: all 0.3s linear 0s;
 			@media (max-width: 768px){
@@ -499,8 +499,73 @@ body::-webkit-scrollbar-thumb {
 }
 
 
+.main-info {
+	display: flex;
+	justify-content: space-between;
+	border-radius: 90px;
+	background: radial-gradient(2900.76% 50.13% at 50% 53.89%, rgba(58, 52, 86, 0.95) 0%, #211E2E 100%);
+	box-shadow: 0px 4px 4px 0px rgba(192, 183, 232, 0.01);
+	height: 167px;
+	align-items: center;
+	margin-top: 100px;
+	padding-left: 39px;
+	padding-right: 80px;
+	&__column {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	&__line {
+		height: 117px;
+		width: 1px;
+		background: rgba(192, 183, 232, 0.33);
+	}
+	&__icon {
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+	}
+
+	&__title {
+		color: #FFF;
+		font-size: 24px;
+	}
+
+	&__subscribe {
+		color: #FFF;
+		font-size: 14px;
+		font-weight: 400;
+	}
+}
 
 
+.intro {
+
+	&__container {
+	}
+
+	&__main {
+	}
+
+	&__title {
+	}
+
+	&__subtitle {
+	}
+
+	&__text {
+	}
+}
+
+.title {
+}
+.subtitle {
+}
+.text {
+}
 
 
 
