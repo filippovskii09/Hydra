@@ -82,12 +82,13 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 		})
 
-		// section.addEventListener('mouseleave', () => {
-		// 	elements.forEach(element => {
-		// 		element.style.transform = `translateX(0px) translateY(0px)`
-		// 	})
-		// })
+		section.addEventListener('mouseleave', () => {
+			elements.forEach(element => {
+				element.style.transform = `translateX(0px) translateY(0px)`
+			})
+		})
 	}
 	
 	paralax(document.querySelector('.main'));
+
 })
