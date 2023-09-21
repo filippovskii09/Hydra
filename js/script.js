@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	window.addEventListener('scroll', () => {
 		let scrollPos = window.scrollY;
 
-		console.log(scrollPos);
 		if (scrollPos > 150) {
 			header.classList.add('fixed')
 		} else {
@@ -90,5 +89,85 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	paralax(document.querySelector('.main'));
+
+	// modal window
+
+	const modal = document.querySelector('.modal'),
+			openButton = document.querySelector('#open'),
+			closeButton = document.querySelector('.close-modal');
+
+	const closeModal = () => {
+		document.documentElement.classList.remove('modal-open');
+	}
+	openButton.addEventListener('click', () => {
+		document.documentElement.classList.add('modal-open');
+	})
+	document.documentElement.addEventListener('keydown', (e) => {
+		if(e.code === 'Escape') {
+			closeModal();
+		}
+	})
+	closeButton.addEventListener('click', closeModal);
+
+	modal.addEventListener('click', (e) => {
+		if(e.target && e.target.classList.contains('modal')) {
+			closeModal();
+		}
+	})
+
+	// scroll to block
+
+	const links = document.querySelectorAll('a[href*="#"]');
+
+	links.forEach(item => {
+		item.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			const blockID = item.getAttribute('href')
+			document.querySelector('' + blockID).scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+		})
+	})
+
+
+
+
+	const forms = document.querySelectorAll('form');
+
+    forms.forEach(item => {
+        bindPostData(item);
+    });
+		
+		const postData = async (url, data) => {
+			let res = await fetch(url, {
+				 method: "POST",
+				 headers: {
+					  'Content-Type':'application/json'
+				 },
+				 body: data
+			});
+	  
+			return await res.json();
+	  };
+ 
+
+  function bindPostData(form) {
+	form.addEventListener('submit', (e) => {
+		 e.preventDefault();
+		 const formData = new FormData(form);
+
+		 const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+		 postData('http://localhost:3000/requests', json)
+		 .then(data => {
+			  console.log(data);
+		 }).catch(() => {
+		 }).finally(() => {
+			  form.reset();
+		 });
+	});
+}
 
 })
